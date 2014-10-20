@@ -22,6 +22,8 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     internal var image : UIImage?
     
+    internal var pinchGestureRecognizer = UIPinchGestureRecognizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +34,8 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         doneButton.layer.borderWidth = 1
         
         imageView.image = image
+        pinchGestureRecognizer.addTarget(self, action: Selector("onPinchToZoom"))
+        imageView.addGestureRecognizer(pinchGestureRecognizer)
         
         var screenSize = UIScreen.mainScreen().bounds
         scrollView.contentInset.bottom = screenSize.height
@@ -54,5 +58,11 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func onDoneButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+//    @IBAction func onPinchToZoom(pinchGestureRecognizer: UIPinchGestureRecognizer) {
+    func onPinchToZoom() {
+        println("pinch")
+        scrollView.zoomScale = pinchGestureRecognizer.scale
     }
 }
