@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kLogOutSegueID = "logoutSegue"
+
 class SettingsViewController: UIViewController, UIActionSheetDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -32,15 +34,15 @@ class SettingsViewController: UIViewController, UIActionSheetDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int) {
+        if (buttonIndex == 0) {
+            performSegueWithIdentifier(kLogOutSegueID, sender: self)
+        }
     }
-    */
+    
+    @IBAction func onLogOutButton(sender: AnyObject) {
+        var actionSheet = UIActionSheet(title: "Are you sure you wish to log out?", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: "Log Out")
+    }
 
 }
