@@ -139,7 +139,7 @@
                                 <rect key="frame" x="0.0" y="110" width="320" height="458"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_feed" id="BFk-jQ-UCW">
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_feed" id="BFk-jQ-UCW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="458"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
@@ -153,6 +153,10 @@
                                             <segue destination="4dZ-Wz-S84" kind="push" id="wkZ-i9-nuQ"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="9ZC-pw-zwh">
+                                        <rect key="frame" x="150" y="8" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.82745098039215681" green="0.83921568627450982" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
@@ -191,7 +195,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="m9U-cv-OHe"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="9ZC-pw-zwh" id="gFb-dx-bV0"/>
                         <outlet property="feedImageView" destination="BFk-jQ-UCW" id="FKQ-21-8kr"/>
+                        <outlet property="feedView" destination="BFk-jQ-UCW" id="PBe-Vg-14e"/>
                         <outlet property="scrollView" destination="YZ6-vp-O3X" id="Pgj-Be-1bK"/>
                     </connections>
                 </viewController>

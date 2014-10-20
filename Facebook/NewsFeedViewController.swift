@@ -12,6 +12,8 @@ class NewsFeedViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var feedImageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var feedView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,7 @@ class NewsFeedViewController: UIViewController {
         // Configure the content size of the scroll view
         scrollView.contentSize = CGSizeMake(320, feedImageView.image!.size.height)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -27,6 +29,12 @@ class NewsFeedViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        activityIndicator.startAnimating()
+        delay(2, { () -> () in
+            self.activityIndicator.stopAnimating()
+            self.feedView.alpha = 1
+        })
         
         scrollView.contentInset.top = 0
         scrollView.contentInset.bottom = 50
