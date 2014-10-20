@@ -20,6 +20,7 @@
 		429277A4198F391500E19641 /* CreateStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429277A3198F391500E19641 /* CreateStatusViewController.swift */; };
 		429277A6198F392800E19641 /* CreatePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429277A5198F392800E19641 /* CreatePhotoViewController.swift */; };
 		429277A8198F393500E19641 /* CreateCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429277A7198F393500E19641 /* CreateCheckinViewController.swift */; };
+		E60828A219F4E03B006E5AFD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60828A119F4E03B006E5AFD /* Util.swift */; };
 		E64ABD3C19EDFC6F0091970F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64ABD3B19EDFC6F0091970F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		429277A3198F391500E19641 /* CreateStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStatusViewController.swift; sourceTree = "<group>"; };
 		429277A5198F392800E19641 /* CreatePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePhotoViewController.swift; sourceTree = "<group>"; };
 		429277A7198F393500E19641 /* CreateCheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCheckinViewController.swift; sourceTree = "<group>"; };
+		E60828A119F4E03B006E5AFD /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		E64ABD3B19EDFC6F0091970F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +98,7 @@
 				42167674198EAAC6008CCBC3 /* View Controllers */,
 				42167655198E3220008CCBC3 /* AppDelegate.swift */,
 				42167659198E3220008CCBC3 /* Main.storyboard */,
+				E60828A119F4E03B006E5AFD /* Util.swift */,
 				4216765C198E3220008CCBC3 /* Images.xcassets */,
 				42167653198E3220008CCBC3 /* Supporting Files */,
 			);
@@ -250,6 +253,7 @@
 				429277A6198F392800E19641 /* CreatePhotoViewController.swift in Sources */,
 				429277A4198F391500E19641 /* CreateStatusViewController.swift in Sources */,
 				429277A8198F393500E19641 /* CreateCheckinViewController.swift in Sources */,
+				E60828A219F4E03B006E5AFD /* Util.swift in Sources */,
 				42167678198ECE0E008CCBC3 /* RequestsViewController.swift in Sources */,
 				42167673198EAABC008CCBC3 /* SettingsViewController.swift in Sources */,
 				4216767A198ECE88008CCBC3 /* NewsFeedViewController.swift in Sources */,

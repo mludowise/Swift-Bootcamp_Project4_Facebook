@@ -430,44 +430,64 @@
                                         <rect key="frame" x="13" y="100" width="295" height="95"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ryg-fo-rFv">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ryg-fo-rFv">
                                         <rect key="frame" x="14" y="200" width="293" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="login_button_enabled">
                                             <color key="titleColor" red="0.69803923369999998" green="0.73333334920000004" blue="0.82352948189999997" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" image="login_button_disabled"/>
+                                        <state key="selected" image="logging_in_button"/>
+                                        <connections>
+                                            <action selector="onLoginButton:" destination="aGi-zJ-dQh" eventType="touchUpInside" id="zqu-Oj-shb"/>
+                                        </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email or phone number" minimumFontSize="17" id="HoB-VM-Zr2" userLabel="Login - Email">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email or phone number" minimumFontSize="17" id="HoB-VM-Zr2" userLabel="Login - Email">
                                         <rect key="frame" x="28" y="111" width="265" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="onEditingChanged:" destination="aGi-zJ-dQh" eventType="editingChanged" id="ukD-fc-i9f"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" minimumFontSize="17" id="e7c-hS-XrQ" userLabel="Login - Password">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="e7c-hS-XrQ" userLabel="Login - Password">
                                         <rect key="frame" x="28" y="155" width="265" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="onEditingChanged:" destination="aGi-zJ-dQh" eventType="editingChanged" id="SBe-G0-bvl"/>
+                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" id="KTN-rA-vmd">
                                         <rect key="frame" x="73" y="20" width="174" height="43"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="5ms-IM-c7d">
+                                        <rect key="frame" x="273" y="216" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.22745098173618317" green="0.35294118523597717" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="5ms-IM-c7d" id="5EQ-QF-w7C"/>
+                        <outlet property="emailField" destination="HoB-VM-Zr2" id="REa-7o-Kgw"/>
+                        <outlet property="loginButton" destination="ryg-fo-rFv" id="RUM-fx-CY3"/>
                         <outlet property="loginComponentsView" destination="60Z-N4-sFq" id="EfV-tI-EdZ"/>
+                        <outlet property="passwordField" destination="e7c-hS-XrQ" id="2l8-Qd-yLj"/>
+                        <segue destination="181-2M-Tzl" kind="modal" identifier="loginSegue" id="Y3t-FK-Or7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aU-GY-iHq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="542" y="-95"/>
+            <point key="canvasLocation" x="-385" y="-95"/>
         </scene>
         <!--News Feed-->
         <scene sceneID="TWc-UL-gYc">
@@ -641,6 +661,8 @@
         <image name="home_feed" width="320" height="1025"/>
         <image name="like_btn" width="17" height="40"/>
         <image name="like_btn_selected" width="17" height="40"/>
+        <image name="logging_in_button" width="293" height="52"/>
+        <image name="login_button_disabled" width="293" height="52"/>
         <image name="login_button_enabled" width="293" height="52"/>
         <image name="logo" width="174" height="43"/>
         <image name="messages" width="320" height="460"/>
