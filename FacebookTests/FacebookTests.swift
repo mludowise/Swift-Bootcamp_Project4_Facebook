@@ -2,8 +2,8 @@
 //  FacebookTests.swift
 //  FacebookTests
 //
-//  Created by Mel Ludowise on 10/19/14.
-//  Copyright (c) 2014 Mel Ludowise. All rights reserved.
+//  Created by Timothy Lee on 8/3/14.
+//  Copyright (c) 2014 codepath. All rights reserved.
 //
 
 import UIKit
