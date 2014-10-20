@@ -1,7 +1,8 @@
 # Project 4: Facebook
 
 The purpose of this homework is to leverage animations and gestures to transition between screens. We're going to use the techniques from this week to implement some interactions in Facebook.
-Time Spent: 
+
+Time Spent: 1 hour (to catch up to exercise)
 
 Completed User Stories:
 * [ ]	Tapping on a photo in the news feed should expand the photo full screen.
