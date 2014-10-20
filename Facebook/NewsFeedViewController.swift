@@ -61,30 +61,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         return kTransitionDuration
     }
     
-//    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-//        println("animating transition")
-//        var containerView = transitionContext.containerView()
-//        var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-//        var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-//        
-//        if (isPresenting) {
-//            containerView.addSubview(toViewController.view)
-//            toViewController.view.alpha = 0
-//            UIView.animateWithDuration(0.4, animations: { () -> Void in
-//                toViewController.view.alpha = 1
-//                }) { (finished: Bool) -> Void in
-//                    transitionContext.completeTransition(true)
-//            }
-//        } else {
-//            UIView.animateWithDuration(0.4, animations: { () -> Void in
-//                fromViewController.view.alpha = 0
-//                }) { (finished: Bool) -> Void in
-//                    transitionContext.completeTransition(true)
-//                    fromViewController.view.removeFromSuperview()
-//            }
-//        }
-//    }
-    
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         println("animating transition")
         var containerView = transitionContext.containerView()
@@ -103,14 +79,20 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 self.imageBackgroundView.alpha = 1
                 self.transitionImageView.frame = UIScreen.mainScreen().bounds
                 }) { (finished: Bool) -> Void in
+                    self.imageBackgroundView.hidden = true
+                    self.transitionImageView.hidden = true
                     containerView.addSubview(photoViewController.view)
                     transitionContext.completeTransition(true)
             }
         } else {
             var feedViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-            var photoViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+            var photoViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
             photoViewController.view.removeFromSuperview()
             
+            imageBackgroundView.hidden = false
+            transitionImageView.hidden = false
+            
+            transitionImageView.frame.origin.y -= photoViewController.scrollView.contentOffset.y
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
                 self.imageBackgroundView.alpha = 0
                 self.transitionImageView.frame = self.scaledThumbnailFrame
