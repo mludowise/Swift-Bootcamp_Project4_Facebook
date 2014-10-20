@@ -41,4 +41,12 @@ class NewsFeedViewController: UIViewController {
         scrollView.scrollIndicatorInsets.top = 0
         scrollView.scrollIndicatorInsets.bottom = 50
     }
+    
+    @IBAction func onThumbnailTap(sender: UITapGestureRecognizer) {
+        println("tap")
+        var imageView = sender.view as UIImageView
+        var photoViewController = storyboard?.instantiateViewControllerWithIdentifier(kPhotoViewControllerID) as PhotoViewController
+        photoViewController.image = imageView.image
+        presentViewController(photoViewController, animated: true, completion: nil)
+    }
 }

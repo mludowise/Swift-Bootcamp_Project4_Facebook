@@ -1,16 +1,13 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
-    },
-    {
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "home_feed@2x.png"
+      "filename" : "wedding4@2x.png"
     },
     {
       "idiom" : "universal",

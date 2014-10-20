@@ -21,6 +21,7 @@
 		429277A6198F392800E19641 /* CreatePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429277A5198F392800E19641 /* CreatePhotoViewController.swift */; };
 		429277A8198F393500E19641 /* CreateCheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429277A7198F393500E19641 /* CreateCheckinViewController.swift */; };
 		E60828A219F4E03B006E5AFD /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60828A119F4E03B006E5AFD /* Util.swift */; };
+		E60828A419F4EE9A006E5AFD /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60828A319F4EE9A006E5AFD /* PhotoViewController.swift */; };
 		E64ABD3C19EDFC6F0091970F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64ABD3B19EDFC6F0091970F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		429277A5198F392800E19641 /* CreatePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePhotoViewController.swift; sourceTree = "<group>"; };
 		429277A7198F393500E19641 /* CreateCheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCheckinViewController.swift; sourceTree = "<group>"; };
 		E60828A119F4E03B006E5AFD /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		E60828A319F4EE9A006E5AFD /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		E64ABD3B19EDFC6F0091970F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 		42167674198EAAC6008CCBC3 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E60828A319F4EE9A006E5AFD /* PhotoViewController.swift */,
 				42167679198ECE88008CCBC3 /* NewsFeedViewController.swift */,
 				42167677198ECE0E008CCBC3 /* RequestsViewController.swift */,
 				429277A1198F35B600E19641 /* MessagesViewController.swift */,
@@ -258,6 +261,7 @@
 				42167673198EAABC008CCBC3 /* SettingsViewController.swift in Sources */,
 				4216767A198ECE88008CCBC3 /* NewsFeedViewController.swift in Sources */,
 				E64ABD3C19EDFC6F0091970F /* LoginViewController.swift in Sources */,
+				E60828A419F4EE9A006E5AFD /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
