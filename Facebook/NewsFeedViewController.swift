@@ -62,10 +62,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        println("animating transition")
         var containerView = transitionContext.containerView()
-        
-        println()
         
         if (isPresenting) {
             var feedViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
@@ -92,7 +89,12 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             imageBackgroundView.hidden = false
             transitionImageView.hidden = false
             
+            // Take into consideration the position insize the scrollView of the photo in the PhotoViewController
+            transitionImageView.frame.size.width *= photoViewController.scrollView.zoomScale
+            transitionImageView.frame.size.height *= photoViewController.scrollView.zoomScale
             transitionImageView.frame.origin.y -= photoViewController.scrollView.contentOffset.y
+            transitionImageView.frame.origin.x -= photoViewController.scrollView.contentOffset.x
+            
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
                 self.imageBackgroundView.alpha = 0
                 self.transitionImageView.frame = self.scaledThumbnailFrame
@@ -105,7 +107,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     @IBAction func onThumbnailTap(sender: UITapGestureRecognizer) {
-        println("tap")
         var thumbnailImageView = sender.view as UIImageView
         
         transitionImageView.image = thumbnailImageView.image
