@@ -253,33 +253,38 @@
                         <outlet property="feedImageView" destination="BFk-jQ-UCW" id="FKQ-21-8kr"/>
                         <outlet property="feedView" destination="BFk-jQ-UCW" id="PBe-Vg-14e"/>
                         <outlet property="scrollView" destination="YZ6-vp-O3X" id="Pgj-Be-1bK"/>
+                        <outlet property="thumbnailImageView1" destination="LS2-qI-GWY" id="1Gr-KM-9sS"/>
+                        <outlet property="thumbnailImageView2" destination="vov-7j-glX" id="B2F-oE-vjQ"/>
+                        <outlet property="thumbnailImageView3" destination="emK-lG-f5Q" id="aik-k7-wcd"/>
+                        <outlet property="thumbnailImageView4" destination="8LG-Cj-z0K" id="q3W-qy-fm6"/>
+                        <outlet property="thumbnailImageView5" destination="md8-J7-CBQ" id="LtR-Tw-eer"/>
                         <segue destination="Z0i-J3-IVH" kind="modal" identifier="photoViewSegue" modalTransitionStyle="crossDissolve" id="bKv-rA-deL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Rx-vT-Xm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="jHD-Hd-jP5" userLabel="Tap Image 1">
                     <connections>
-                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="qKh-hW-nLd"/>
+                        <action selector="onThumbnailTap1:" destination="hBK-bb-7vk" id="zVx-ix-uVg"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="N7R-Rs-ble" userLabel="Tap Image 2">
                     <connections>
-                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="psg-aW-hsp"/>
+                        <action selector="onThumbnailTap2:" destination="hBK-bb-7vk" id="zbW-zt-Ag9"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="4uz-Aa-cFi" userLabel="Tap Image 3">
                     <connections>
-                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="W2v-ld-U4o"/>
+                        <action selector="onThumbnailTap3:" destination="hBK-bb-7vk" id="O9v-IC-53X"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="0Oz-Ya-jsh" userLabel="Tap Image 4">
                     <connections>
-                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="bhr-cp-yAv"/>
+                        <action selector="onThumbnailTap4:" destination="hBK-bb-7vk" id="tiG-Kr-jjJ"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="L4a-PU-j8V" userLabel="Tap Image 5">
                     <connections>
-                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="UJg-sL-pzi"/>
+                        <action selector="onThumbnailTap5:" destination="hBK-bb-7vk" id="d84-aH-vBi"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -716,28 +721,89 @@
             <objects>
                 <viewController storyboardIdentifier="photoViewController" id="Z0i-J3-IVH" customClass="PhotoViewController" customModule="Facebook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8PV-Pd-4QM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1600" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="3kE-3l-HUf" userLabel="Background">
+                            <view contentMode="scaleToFill" id="jmu-BL-VPh" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" id="qAM-Pb-oFC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="T1O-Et-r6i" userLabel="Paging Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="1600" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="FYg-SZ-Uqi" userLabel="image">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" id="qAM-Pb-oFC" userLabel="Scroll View 1" customClass="ImageScrollView" customModule="Facebook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="5K5-Y6-kIG" appends="YES" id="V7d-ve-i9Q"/>
-                                        </connections>
-                                    </imageView>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="FYg-SZ-Uqi">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="5K5-Y6-kIG" appends="YES" id="V7d-ve-i9Q"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </scrollView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" id="r3D-td-cIY" userLabel="Scroll View 2" customClass="ImageScrollView" customModule="Facebook" customModuleProvider="target">
+                                        <rect key="frame" x="320" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="evW-EX-uds">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="k0Z-Bm-a3v" appends="YES" id="beY-PA-1zc"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </scrollView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" id="Mha-Q8-fSy" userLabel="Scroll View 3" customClass="ImageScrollView" customModule="Facebook" customModuleProvider="target">
+                                        <rect key="frame" x="640" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding3" id="dHJ-FP-GYQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Xjy-87-Vbc" appends="YES" id="WvR-CK-n0A"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </scrollView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" id="Ldi-tl-o2n" userLabel="Scroll View 4" customClass="ImageScrollView" customModule="Facebook" customModuleProvider="target">
+                                        <rect key="frame" x="960" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding4" id="sK2-MK-X2p">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Ai8-mX-PQr" appends="YES" id="fQ0-KH-jhl"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </scrollView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="4" id="7yM-dq-Pqn" userLabel="Scroll View 5" customClass="ImageScrollView" customModule="Facebook" customModuleProvider="target">
+                                        <rect key="frame" x="1280" y="0.0" width="320" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding5" id="E1b-eZ-nzf">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="8PU-nv-MCu" appends="YES" id="F74-nv-fkR"/>
+                                                </connections>
+                                            </imageView>
+                                        </subviews>
+                                    </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MxR-fF-ndN">
                                 <rect key="frame" x="259" y="25" width="45" height="26"/>
@@ -758,24 +824,49 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="1600" height="568"/>
                     <connections>
-                        <outlet property="backgroundView" destination="3kE-3l-HUf" id="NH9-dO-6Zr"/>
+                        <outlet property="backgroundView" destination="jmu-BL-VPh" id="qkn-i3-xPY"/>
                         <outlet property="doneButton" destination="MxR-fF-ndN" id="lgy-CF-hSp"/>
-                        <outlet property="imageView" destination="FYg-SZ-Uqi" id="aMJ-d6-ciz"/>
-                        <outlet property="scrollView" destination="qAM-Pb-oFC" id="HBY-dM-m9r"/>
+                        <outlet property="imageScrollView1" destination="qAM-Pb-oFC" id="0j2-3L-hDT"/>
+                        <outlet property="imageScrollView2" destination="r3D-td-cIY" id="szd-eR-ko7"/>
+                        <outlet property="imageScrollView3" destination="Mha-Q8-fSy" id="D0I-TI-lgf"/>
+                        <outlet property="imageScrollView4" destination="Ldi-tl-o2n" id="gxR-Ol-mFV"/>
+                        <outlet property="imageScrollView5" destination="7yM-dq-Pqn" id="kwb-BR-Fm2"/>
+                        <outlet property="pagingScrollView" destination="T1O-Et-r6i" id="pN9-m7-Vdj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vu4-87-Shm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="5K5-Y6-kIG" userLabel="Pinch To Zoom">
+                <pinchGestureRecognizer id="5K5-Y6-kIG" userLabel="Pinch To Zoom 1">
                     <connections>
                         <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="bWI-A5-nW3"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <pinchGestureRecognizer id="k0Z-Bm-a3v" userLabel="Pinch To Zoom 2">
+                    <connections>
+                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="7ch-iq-9s4"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <pinchGestureRecognizer id="Xjy-87-Vbc" userLabel="Pinch To Zoom 3">
+                    <connections>
+                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="r6i-Gw-TNP"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <pinchGestureRecognizer id="Ai8-mX-PQr" userLabel="Pinch To Zoom 4">
+                    <connections>
+                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="p1g-xI-SMe"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <pinchGestureRecognizer id="8PU-nv-MCu" userLabel="Pinch To Zoom 5">
+                    <connections>
+                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="GOS-2M-2kI"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2147" y="2970"/>
+            <point key="canvasLocation" x="-2720" y="2986"/>
         </scene>
         <!--Create Checkin View Controller-->
         <scene sceneID="R0r-rk-yk1">
