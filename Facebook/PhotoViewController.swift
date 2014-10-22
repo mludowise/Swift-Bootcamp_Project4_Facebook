@@ -27,18 +27,16 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageView5: UIImageView!
 
     private var initialZoom : CGFloat = 1
-    internal var loadWithImageIndex = 0
+    internal var imageIndex = 0
     
     private var imageViews : [UIImageView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Give button a border
         doneButton.layer.borderColor = UIColor.whiteColor().CGColor
         doneButton.layer.borderWidth = 1
-        
 
         imageViews.append(imageView1)
         imageViews.append(imageView2)
@@ -51,21 +49,19 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         
         // Adjust scroll view & set delegate
         scrollView.delegate = self
-        adjustScrollContentBounds()
+        adjustScrollSettings()
         
         // Initialize for selected image
-        scrollView.contentOffset.x = CGFloat(loadWithImageIndex) * UIScreen.mainScreen().bounds.width
+        scrollView.contentOffset.x = CGFloat(imageIndex) * UIScreen.mainScreen().bounds.width
     }
     
     internal func getImageOffsetAndZoom() -> (zoomScale: CGFloat, offset: CGPoint) {
-        var offsetX = scrollView.contentOffset.x - UIScreen.mainScreen().bounds.width * CGFloat(getImageIndex())
+        var offsetX = scrollView.contentOffset.x - UIScreen.mainScreen().bounds.width * CGFloat(getImageIndexFromScrollPos())
         var offsetPoint = CGPoint(x: offsetX, y: scrollView.contentOffset.y)
-        println("Get Offset: \(scrollView.contentOffset)")
         return (scrollView.zoomScale, offsetPoint)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        println("offset: \(scrollView.contentOffset) size: \(scrollView.contentSize)")
         if (scrollView.zoomScale <= 1) {
             backgroundView.alpha = max(0, kScrollThreshold - abs(scrollView.contentOffset.y)) / kScrollThreshold * 0.5
         }
@@ -73,6 +69,9 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidEndDragging(scrollView: UIScrollView!, willDecelerate decelerate: Bool) {
         if (scrollView.zoomScale <= 1) {
+            // Update the image index after paging
+            imageIndex = getImageIndexFromScrollPos()
+            
             if (abs(scrollView.contentOffset.y) < kScrollThreshold) { // scroll back in place
                 var offset = CGPoint(x: scrollView.contentOffset.x, y: 0)
                 scrollView.setContentOffset(offset, animated: true)
@@ -82,10 +81,10 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
                 dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        println("End Drag: \(scrollView.contentOffset)")
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView!) -> UIView! {
+//        println("image\(getIndexFromImageView(getImageView()!))")
         return getImageView()
     }
     
@@ -94,23 +93,27 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func onPinchToZoom(pinchGestureRecognizer: UIPinchGestureRecognizer) {
+        println("pinchScale: \(pinchGestureRecognizer.scale) zoomScale:\(scrollView.zoomScale)")
+        println(scrollView.contentOffset)
         if (pinchGestureRecognizer.state == UIGestureRecognizerState.Began) {
             initialZoom = scrollView.zoomScale
+            println(imageIndex)
         }
         scrollView.zoomScale = initialZoom * pinchGestureRecognizer.scale
         if (pinchGestureRecognizer.state == UIGestureRecognizerState.Ended) {
-            adjustScrollContentBounds()
+            adjustScrollSettings()
         }
     }
     
-    private func adjustScrollContentBounds() {
+    private func adjustScrollSettings() {
         var screenSize = UIScreen.mainScreen().bounds
         if (scrollView.zoomScale >  1) { // Zoomed in
+            scrollView.pagingEnabled = false
             scrollView.contentSize = getImageView()!.frame.size
             scrollView.contentInset.bottom = 0
             scrollView.contentInset.top = 0
         } else { // Zoomed all the way out
-//            scrollView.contentSize = screenSize.size
+            scrollView.pagingEnabled = true
             scrollView.contentSize = CGSize(width: screenSize.width * CGFloat(imageViews.count), height: screenSize.height)
             scrollView.contentInset.bottom = screenSize.height
             scrollView.contentInset.top = screenSize.height
@@ -118,14 +121,15 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     }
     
     private func adjustImagesForScreensize() {
-        var screenSize = UIScreen.mainScreen().bounds.size
+        var screenBounds = UIScreen.mainScreen().bounds
         for (i, imageView) in enumerate(imageViews) {
-            imageView.frame.size = screenSize
-            imageView.frame.origin.x = CGFloat(i) * screenSize.width
+//            imageView.frame.size = screenBounds.size
+            resizeAndRepositionImageToAspectFit(imageView, screenBounds)
+            imageView.frame.origin.x = CGFloat(i) * screenBounds.width
         }
     }
     
-    internal func getImageIndex() -> Int {
+    private func getImageIndexFromScrollPos() -> Int {
         return Int(scrollView.contentOffset.x / UIScreen.mainScreen().bounds.width)
     }
     
@@ -134,7 +138,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     }
     
     private func getImageView() -> UIImageView? {
-        return getImageViewFromIndex(getImageIndex())
+        return getImageViewFromIndex(imageIndex)
     }
     
     private func getIndexFromImageView(imageView: UIImageView) -> Int? {

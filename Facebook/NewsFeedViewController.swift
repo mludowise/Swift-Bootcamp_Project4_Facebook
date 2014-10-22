@@ -86,7 +86,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as PhotoViewController :
             transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
         
-        var imageIndex = photoViewController.getImageIndex()
+        var imageIndex = photoViewController.imageIndex
         var thumbnailImageView = thumbnailImageViews[imageIndex]
         var thumbnailFrame = thumbnailImageView.frame
         var scaledThumbnailSize : CGSize!
@@ -98,6 +98,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             // Image is wider than thumbnail
             scaledThumbnailSize = CGSize(width: thumbnailSize.width / thumbnailSize.height * thumbnailFrame.size.height, height: thumbnailFrame.height)
         }
+        
         var convertedThumbnailOrigin = view.convertPoint(thumbnailFrame.origin, fromView: thumbnailImageView.superview?)
         scaledThumbnailFrame = CGRect(origin:
             CGPoint(x: convertedThumbnailOrigin.x + (thumbnailFrame.width - scaledThumbnailSize.width) / 2,
@@ -132,8 +133,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             transitionImageView.frame.origin.x -= offsetAndZoom.offset.x
             transitionImageView.frame.origin.y -= offsetAndZoom.offset.y
             
-            println(offsetAndZoom.offset)
-            
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
                 self.imageBackgroundView.alpha = 0
                 self.transitionImageView.frame = self.scaledThumbnailFrame
@@ -149,7 +148,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         var thumbnailImageView = sender.view as UIImageView
         var photoViewController = storyboard?.instantiateViewControllerWithIdentifier(kPhotoViewControllerID) as PhotoViewController
 //        photoViewController.image = thumbnailImageView.image
-        photoViewController.loadWithImageIndex = find(thumbnailImageViews, thumbnailImageView)!
+        photoViewController.imageIndex = find(thumbnailImageViews, thumbnailImageView)!
         photoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         photoViewController.transitioningDelegate = self
         presentViewController(photoViewController, animated: true, completion: nil)
