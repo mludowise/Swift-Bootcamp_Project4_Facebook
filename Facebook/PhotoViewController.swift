@@ -79,14 +79,16 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func onPinchToZoom(pinchGestureRecognizer: UIPinchGestureRecognizer) {
-        var imageScrollView = pinchGestureRecognizer.view?.superview as ImageScrollView
-        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Began) {
-            initialZoom = imageScrollView.zoomScale
-        }
-        imageScrollView.zoomScale = initialZoom * pinchGestureRecognizer.scale
-        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Ended) {
-            imageScrollView.adjustScrollContentBounds()
-        }
+//        var imageScrollView = pinchGestureRecognizer.view?.superview as ImageScrollView
+//        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Began) {
+//            initialZoom = imageScrollView.zoomScale
+//        }
+//        imageScrollView.zoomScale = initialZoom * pinchGestureRecognizer.scale
+//        println("pinch")
+//        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Ended) {
+//            imageScrollView.adjustScrollContentBounds()
+//            println("end")
+//        }
     }
 }
 
@@ -120,13 +122,24 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
+//        adjustScrollContentBounds()
+    }
+    
     func viewForZoomingInScrollView(scrollView: UIScrollView!) -> UIView! {
         return subviews[0] as UIView
     }
     
+    // TODO adjust contentSize & offset after Zoom
     func adjustScrollContentBounds() {
         if (zoomScale >  1) { // Zoomed in
-            contentSize = subviews[0].frame.size
+//            contentSize = subviews[0].frame.size
+            var size = subviews[0].frame.size
+//            var offset = CGPoint(x: contentOffset.x - contentSize.width - size.width, y: contentOffset.y - contentSize.height - size.height)
+//            contentOffset.y -= contentSize.height - size.height
+//            contentOffset.x -= contentSize.width - size.width
+//            contentSize = size
+//            setContentOffset(offset, animated: true)
             contentInset.bottom = 0
             contentInset.top = 0
         } else { // Zoomed all the way out
@@ -135,5 +148,6 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
             contentInset.bottom = screenSize.height
             contentInset.top = screenSize.height
         }
+        println("Adjusted to: \(contentSize)")
     }
 }
