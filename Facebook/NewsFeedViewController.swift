@@ -112,7 +112,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             feedViewController.view.addSubview(transitionImageView)
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
                 self.imageBackgroundView.alpha = 1
-                self.transitionImageView.frame = UIScreen.mainScreen().bounds
+                self.transitionImageView.frame = getResizedFrameFromAspectFit(self.transitionImageView.image!, UIScreen.mainScreen().bounds)
                 }) { (finished: Bool) -> Void in
                     self.imageBackgroundView.hidden = true
                     self.transitionImageView.hidden = true
@@ -121,7 +121,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             }
         } else {
             photoViewController.view.removeFromSuperview()
-            transitionImageView.frame = UIScreen.mainScreen().bounds
+            transitionImageView.frame = getResizedFrameFromAspectFit(transitionImageView.image!, UIScreen.mainScreen().bounds)
 
             imageBackgroundView.hidden = false
             transitionImageView.hidden = false
