@@ -738,7 +738,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="FYg-SZ-Uqi">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="FYg-SZ-Uqi">
                                                 <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
@@ -752,7 +752,7 @@
                                         <rect key="frame" x="320" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="evW-EX-uds">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="evW-EX-uds">
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
@@ -766,7 +766,7 @@
                                         <rect key="frame" x="640" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding3" id="dHJ-FP-GYQ">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding3" id="dHJ-FP-GYQ">
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
@@ -780,7 +780,7 @@
                                         <rect key="frame" x="960" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding4" id="sK2-MK-X2p">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding4" id="sK2-MK-X2p">
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
@@ -794,7 +794,7 @@
                                         <rect key="frame" x="1280" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding5" id="E1b-eZ-nzf">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding5" id="E1b-eZ-nzf">
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
