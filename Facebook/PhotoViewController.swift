@@ -61,10 +61,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         return (imageScrollView.zoomScale, imageScrollView.contentOffset)
     }
     
-//    internal func getImage() -> UIImage? {
-//        return (getCurrentImageScrollView().subviews[0] as UIImageView).image
-//    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         imageIndex = Int(pagingScrollView.contentOffset.x / UIScreen.mainScreen().bounds.width)
     }

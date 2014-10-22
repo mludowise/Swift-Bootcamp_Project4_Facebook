@@ -76,6 +76,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        // TODO: Simplify this code
         var containerView = transitionContext.containerView()
         
         var feedViewController = isPresenting ?
@@ -143,73 +144,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         }
     }
 
-//    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-//        var containerView = transitionContext.containerView()
-//        
-//        var feedViewController = isPresenting ?
-//            transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! :
-//            transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-//        
-//        var photoViewController = isPresenting ?
-//            transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as PhotoViewController :
-//            transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
-//        
-//        println(photoViewController.imageIndex)
-//        
-//        var imageBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
-//        imageBackgroundView.backgroundColor = UIColor.blackColor()
-//        
-//        var thumbnailImageView = thumbnailImageViews[photoViewController.imageIndex]
-//        var transitionImageView = UIImageView(image: thumbnailImageView.image)
-//        transitionImageView.contentMode = UIViewContentMode.ScaleAspectFit
-//        var thumbnailFrame = getResizedFrameFromAspectFill(thumbnailImageView.image!, thumbnailImageView.frame)
-//        thumbnailFrame.origin = view.convertPoint(thumbnailFrame.origin, fromView: thumbnailImageView.superview?)
-//        
-//        println(thumbnailFrame)
-//        
-//        feedViewController.view.addSubview(imageBackgroundView)
-//        feedViewController.view.addSubview(transitionImageView)
-//        
-//        if (isPresenting) {
-//            imageBackgroundView.alpha = 0
-//            transitionImageView.frame = thumbnailFrame
-//            UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
-//                imageBackgroundView.alpha = 1
-//                transitionImageView.frame = UIScreen.mainScreen().bounds
-//                }) { (finished: Bool) -> Void in
-////                    imageBackgroundView.hidden = true
-////                    transitionImageView.hidden = true
-//                    containerView.addSubview(photoViewController.view)
-//                    transitionContext.completeTransition(true)
-//                    imageBackgroundView.removeFromSuperview()
-//                    transitionImageView.removeFromSuperview()
-//            }
-//        } else {
-//            println("dismiss")
-//            photoViewController.view.removeFromSuperview()
-//            transitionImageView.frame = UIScreen.mainScreen().bounds
-//            
-////            imageBackgroundView.hidden = false
-////            transitionImageView.hidden = false
-//            
-//            // Take into consideration the position insize the scrollView of the photo in the PhotoViewController
-////            var imageOffsetAndZoom = photoViewController.getImageOffsetAndZoom()
-////            transitionImageView.frame.size.width *= imageOffsetAndZoom.zoomScale
-////            transitionImageView.frame.size.height *= imageOffsetAndZoom.zoomScale
-////            transitionImageView.frame.origin.y -= imageOffsetAndZoom.offset.y
-////            transitionImageView.frame.origin.x -= imageOffsetAndZoom.offset.x
-//            
-//            UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
-//                imageBackgroundView.alpha = 0
-//                transitionImageView.frame = thumbnailFrame
-//                }) { (finished: Bool) -> Void in
-//                    transitionContext.completeTransition(true)
-//                    imageBackgroundView.removeFromSuperview()
-//                    transitionImageView.removeFromSuperview()
-//            }
-//        }
-//    }
-    
     @IBAction func onThumbnailTap1(sender: UITapGestureRecognizer) {
         onThumbnailTap(sender, imageIndex: 0)
     }
@@ -231,27 +165,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func onThumbnailTap(sender: UITapGestureRecognizer, imageIndex: Int) {
-//        var thumbnailImageView = sender.view as UIImageView
-//        
-//        transitionImageView.image = thumbnailImageView.image
-//        
-//        var thumbnailFrame = thumbnailImageView.frame
-//        var scaledThumbnailSize : CGSize!
-//        var thumbnailSize = thumbnailImageView.image!.size
-//        if (thumbnailSize.height / thumbnailSize.width > thumbnailFrame.size.height / thumbnailFrame.size.width) {
-//            // Image is taller than thumbnail
-//            scaledThumbnailSize = CGSize(width: thumbnailFrame.width, height: thumbnailSize.height / thumbnailSize.width * thumbnailFrame.size.width)
-//        } else {
-//            // Image is wider than thumbnail
-//            scaledThumbnailSize = CGSize(width: thumbnailSize.width / thumbnailSize.height * thumbnailFrame.size.height, height: thumbnailFrame.height)
-//        }
-//        var convertedThumbnailOrigin = view.convertPoint(thumbnailFrame.origin, fromView: thumbnailImageView.superview?)
-//        scaledThumbnailFrame = CGRect(origin:
-//            CGPoint(x: convertedThumbnailOrigin.x + (thumbnailFrame.width - scaledThumbnailSize.width) / 2,
-//                y: convertedThumbnailOrigin.y + (thumbnailFrame.height - scaledThumbnailSize.height) / 2), size: scaledThumbnailSize)
-        
         var photoViewController = storyboard?.instantiateViewControllerWithIdentifier(kPhotoViewControllerID) as PhotoViewController
-//        photoViewController.image = thumbnailImageView.image
         photoViewController.imageIndex = imageIndex
         photoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         photoViewController.transitioningDelegate = self
