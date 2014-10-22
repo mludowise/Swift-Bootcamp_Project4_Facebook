@@ -21,8 +21,22 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     private var scaledThumbnailFrame : CGRect!
     private var imageBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
     
+    @IBOutlet weak var imageView1: UIImageView!
+    @IBOutlet weak var imageView2: UIImageView!
+    @IBOutlet weak var imageView3: UIImageView!
+    @IBOutlet weak var imageView4: UIImageView!
+    @IBOutlet weak var imageView5: UIImageView!
+    
+    private var thumbnailImageViews : [UIImageView] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        thumbnailImageViews.append(imageView1)
+        thumbnailImageViews.append(imageView2)
+        thumbnailImageViews.append(imageView3)
+        thumbnailImageViews.append(imageView4)
+        thumbnailImageViews.append(imageView5)
 
         // Configure the content size of the scroll view
         scrollView.contentSize = CGSizeMake(320, feedImageView.image!.size.height)
@@ -63,54 +77,17 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         var containerView = transitionContext.containerView()
+
+        var feedViewController = isPresenting ?
+            transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! :
+            transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         
-        if (isPresenting) {
-            var feedViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-            var photoViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-            
-            imageBackgroundView.alpha = 0
-            transitionImageView.frame = scaledThumbnailFrame
-            feedViewController.view.addSubview(imageBackgroundView)
-            feedViewController.view.addSubview(transitionImageView)
-            UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
-                self.imageBackgroundView.alpha = 1
-                self.transitionImageView.frame = UIScreen.mainScreen().bounds
-                }) { (finished: Bool) -> Void in
-                    self.imageBackgroundView.hidden = true
-                    self.transitionImageView.hidden = true
-                    containerView.addSubview(photoViewController.view)
-                    transitionContext.completeTransition(true)
-            }
-        } else {
-            var feedViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-            var photoViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
-            photoViewController.view.removeFromSuperview()
-            
-            imageBackgroundView.hidden = false
-            transitionImageView.hidden = false
-            
-            // Take into consideration the position insize the scrollView of the photo in the PhotoViewController
-            transitionImageView.frame.size.width *= photoViewController.scrollView.zoomScale
-            transitionImageView.frame.size.height *= photoViewController.scrollView.zoomScale
-            transitionImageView.frame.origin.y -= photoViewController.scrollView.contentOffset.y
-            transitionImageView.frame.origin.x -= photoViewController.scrollView.contentOffset.x
-            
-            UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
-                self.imageBackgroundView.alpha = 0
-                self.transitionImageView.frame = self.scaledThumbnailFrame
-                }) { (finished: Bool) -> Void in
-                    transitionContext.completeTransition(true)
-                    self.imageBackgroundView.removeFromSuperview()
-                    self.transitionImageView.removeFromSuperview()
-            }
-        }
-    }
-    
-    @IBAction func onThumbnailTap(sender: UITapGestureRecognizer) {
-        var thumbnailImageView = sender.view as UIImageView
+        var photoViewController = isPresenting ?
+            transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as PhotoViewController :
+            transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
         
-        transitionImageView.image = thumbnailImageView.image
-        
+        var imageIndex = photoViewController.getImageIndex()
+        var thumbnailImageView = thumbnailImageViews[imageIndex]
         var thumbnailFrame = thumbnailImageView.frame
         var scaledThumbnailSize : CGSize!
         var thumbnailSize = thumbnailImageView.image!.size
@@ -126,8 +103,53 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             CGPoint(x: convertedThumbnailOrigin.x + (thumbnailFrame.width - scaledThumbnailSize.width) / 2,
                 y: convertedThumbnailOrigin.y + (thumbnailFrame.height - scaledThumbnailSize.height) / 2), size: scaledThumbnailSize)
         
+        transitionImageView.image = photoViewController.getImage()
+        
+        if (isPresenting) {
+            imageBackgroundView.alpha = 0
+            transitionImageView.frame = scaledThumbnailFrame
+            feedViewController.view.addSubview(imageBackgroundView)
+            feedViewController.view.addSubview(transitionImageView)
+            UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
+                self.imageBackgroundView.alpha = 1
+                self.transitionImageView.frame = UIScreen.mainScreen().bounds
+                }) { (finished: Bool) -> Void in
+                    self.imageBackgroundView.hidden = true
+                    self.transitionImageView.hidden = true
+                    containerView.addSubview(photoViewController.view)
+                    transitionContext.completeTransition(true)
+            }
+        } else {
+            photoViewController.view.removeFromSuperview()
+            
+            imageBackgroundView.hidden = false
+            transitionImageView.hidden = false
+            
+            // Take into consideration the position insize the scrollView of the photo in the PhotoViewController
+            var offsetAndZoom = photoViewController.getImageOffsetAndZoom()
+            transitionImageView.frame.size.width *= offsetAndZoom.zoomScale
+            transitionImageView.frame.size.height *= offsetAndZoom.zoomScale
+            transitionImageView.frame.origin.x -= offsetAndZoom.offset.x
+            transitionImageView.frame.origin.y -= offsetAndZoom.offset.y
+            
+            println(offsetAndZoom.offset)
+            
+            UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
+                self.imageBackgroundView.alpha = 0
+                self.transitionImageView.frame = self.scaledThumbnailFrame
+                }) { (finished: Bool) -> Void in
+                    transitionContext.completeTransition(true)
+                    self.imageBackgroundView.removeFromSuperview()
+                    self.transitionImageView.removeFromSuperview()
+            }
+        }
+    }
+    
+     @IBAction func onThumbnailTap(sender: UITapGestureRecognizer) {
+        var thumbnailImageView = sender.view as UIImageView
         var photoViewController = storyboard?.instantiateViewControllerWithIdentifier(kPhotoViewControllerID) as PhotoViewController
-        photoViewController.image = thumbnailImageView.image
+//        photoViewController.image = thumbnailImageView.image
+        photoViewController.loadWithImageIndex = find(thumbnailImageViews, thumbnailImageView)!
         photoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         photoViewController.transitioningDelegate = self
         presentViewController(photoViewController, animated: true, completion: nil)
