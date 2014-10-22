@@ -86,7 +86,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView!) -> UIView! {
-        return view//getImageView()
+        return getImageView()
     }
     
     @IBAction func onDoneButton(sender: AnyObject) {
