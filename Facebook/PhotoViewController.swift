@@ -65,6 +65,16 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         imageIndex = Int(pagingScrollView.contentOffset.x / UIScreen.mainScreen().bounds.width)
     }
     
+    var prevImageIndex = 0
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        prevImageIndex = imageIndex
+    }
+    
+    // TODO: Reset image size after paging
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+//        imageScrollViews[prevImageIndex].reset()
+    }
+    
     private func initializeZoomScrollViews() {
         for (i, imageScrollView) in enumerate(imageScrollViews) {
             imageScrollView.backgroundView = backgroundView
@@ -128,6 +138,12 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
     
     func viewForZoomingInScrollView(scrollView: UIScrollView!) -> UIView! {
         return subviews[0] as UIView
+    }
+    
+    func reset() {
+        zoomScale = 1
+        adjustScrollContentBounds()
+        (subviews[0] as UIView).center = center
     }
     
     // TODO adjust contentSize & offset after Zoom
