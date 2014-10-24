@@ -119,8 +119,14 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        (superview as UIScrollView).scrollEnabled = false
+    }
+    
     func scrollViewDidEndDragging(scrollView: UIScrollView!, willDecelerate decelerate: Bool) {
+        println(contentOffset)
         if (zoomScale == 1) {
+            (superview as UIScrollView).scrollEnabled = false
             if (abs(scrollView.contentOffset.y) < kScrollThreshold) { // scroll back in place
                 setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             } else {
@@ -129,14 +135,25 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
         }
     }
     
+    func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView!) {
+        (superview as UIScrollView).scrollEnabled = false
+    }
+    
     func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
         adjustContentInset()
         
         if (zoomScale > 1) {
             // Disable paging until zoomed out
             (superview as UIScrollView).scrollEnabled = false
+            
+            // Allow user to pan in any direction when zoomed in
+            directionalLockEnabled = false
         } else {
+            // Renable paging
             (superview as UIScrollView).scrollEnabled = true
+            
+            // Directoin lock when zoomed out
+            directionalLockEnabled = true
             
             // I don't understand why, but after over-zooming out, the picture zooms in and then bounces up. This readjusts it
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
