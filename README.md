@@ -21,6 +21,6 @@ https://developer.apple.com/videos/wwdc/2010/?id=104
 
 Walkthrough of all user stories:
 
-![Video Walkthrough](demo.gif)
+![Video Walkthrough](demo2.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
