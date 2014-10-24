@@ -26,7 +26,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     
     private var thumbnailImageViews : [UIImageView] = []
     private var transitionImageView = UIImageView()
-    private var scaledThumbnailFrame : CGRect!
     private var imageBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
     
     override func viewDidLoad() {
@@ -76,42 +75,34 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        // TODO: Simplify this code
         var containerView = transitionContext.containerView()
-        
-        var feedViewController = isPresenting ?
-            transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! :
-            transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         
         var photoViewController = isPresenting ?
             transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as PhotoViewController :
             transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
         
         var thumbnailImageView = thumbnailImageViews[photoViewController.imageIndex]
+        var thumbnailFrame = getResizedFrameFromAspectFill(thumbnailImageView.image!, thumbnailImageView.frame)
+        thumbnailFrame.origin = view.convertPoint(thumbnailFrame.origin, fromView: thumbnailImageView.superview)
         transitionImageView.image = thumbnailImageView.image
         
-        var thumbnailFrame = thumbnailImageView.frame
-        var scaledThumbnailSize : CGSize!
-        var thumbnailSize = thumbnailImageView.image!.size
-        if (thumbnailSize.height / thumbnailSize.width > thumbnailFrame.size.height / thumbnailFrame.size.width) {
-            // Image is taller than thumbnail
-            scaledThumbnailSize = CGSize(width: thumbnailFrame.width, height: thumbnailSize.height / thumbnailSize.width * thumbnailFrame.size.width)
-        } else {
-            // Image is wider than thumbnail
-            scaledThumbnailSize = CGSize(width: thumbnailSize.width / thumbnailSize.height * thumbnailFrame.size.height, height: thumbnailFrame.height)
-        }
-        var convertedThumbnailOrigin = view.convertPoint(thumbnailFrame.origin, fromView: thumbnailImageView.superview?)
-        scaledThumbnailFrame = CGRect(origin:
-            CGPoint(x: convertedThumbnailOrigin.x + (thumbnailFrame.width - scaledThumbnailSize.width) / 2,
-                y: convertedThumbnailOrigin.y + (thumbnailFrame.height - scaledThumbnailSize.height) / 2), size: scaledThumbnailSize)
-        
         if (isPresenting) {
+            // Set background to transparent
             imageBackgroundView.alpha = 0
-            transitionImageView.frame = scaledThumbnailFrame
-            feedViewController.view.addSubview(imageBackgroundView)
-            feedViewController.view.addSubview(transitionImageView)
+            
+            // Set image frame to thumbnail
+            transitionImageView.frame = thumbnailFrame
+            
+            // Add them both to our view
+            view.addSubview(imageBackgroundView)
+            view.addSubview(transitionImageView)
+            
+            // Animate
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
+                // Set background to opaque
                 self.imageBackgroundView.alpha = 1
+                
+                // Set image frame to that of the resulting view
                 self.transitionImageView.frame = getResizedFrameFromAspectFit(self.transitionImageView.image!, UIScreen.mainScreen().bounds)
                 }) { (finished: Bool) -> Void in
                     self.imageBackgroundView.hidden = true
@@ -131,7 +122,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
                 self.imageBackgroundView.alpha = 0
-                self.transitionImageView.frame = self.scaledThumbnailFrame
+                self.transitionImageView.frame = thumbnailFrame
                 }) { (finished: Bool) -> Void in
                     transitionContext.completeTransition(true)
                     self.imageBackgroundView.removeFromSuperview()
