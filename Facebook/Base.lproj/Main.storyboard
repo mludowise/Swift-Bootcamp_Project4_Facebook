@@ -265,27 +265,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Rx-vT-Xm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="jHD-Hd-jP5" userLabel="Tap Image 1">
                     <connections>
-                        <action selector="onThumbnailTap1:" destination="hBK-bb-7vk" id="zVx-ix-uVg"/>
+                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="gkl-kC-UZt"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="N7R-Rs-ble" userLabel="Tap Image 2">
                     <connections>
-                        <action selector="onThumbnailTap2:" destination="hBK-bb-7vk" id="zbW-zt-Ag9"/>
+                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="mWP-Oi-HjH"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="4uz-Aa-cFi" userLabel="Tap Image 3">
                     <connections>
-                        <action selector="onThumbnailTap3:" destination="hBK-bb-7vk" id="O9v-IC-53X"/>
+                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="n2j-Jv-x14"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="0Oz-Ya-jsh" userLabel="Tap Image 4">
                     <connections>
-                        <action selector="onThumbnailTap4:" destination="hBK-bb-7vk" id="tiG-Kr-jjJ"/>
+                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="fLi-Wt-8HU"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="L4a-PU-j8V" userLabel="Tap Image 5">
                     <connections>
-                        <action selector="onThumbnailTap5:" destination="hBK-bb-7vk" id="d84-aH-vBi"/>
+                        <action selector="onThumbnailTap:" destination="hBK-bb-7vk" id="DbY-DB-RrT"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

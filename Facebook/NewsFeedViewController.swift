@@ -135,29 +135,11 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         }
     }
 
-    @IBAction func onThumbnailTap1(sender: UITapGestureRecognizer) {
-        onThumbnailTap(sender, imageIndex: 0)
-    }
-    
-    @IBAction func onThumbnailTap2(sender: UITapGestureRecognizer) {
-        onThumbnailTap(sender, imageIndex: 1)
-    }
-    
-    @IBAction func onThumbnailTap3(sender: UITapGestureRecognizer) {
-        onThumbnailTap(sender, imageIndex: 2)
-    }
-    
-    @IBAction func onThumbnailTap4(sender: UITapGestureRecognizer) {
-        onThumbnailTap(sender, imageIndex: 3)
-    }
-    
-    @IBAction func onThumbnailTap5(sender: UITapGestureRecognizer) {
-        onThumbnailTap(sender, imageIndex: 4)
-    }
-    
-    func onThumbnailTap(sender: UITapGestureRecognizer, imageIndex: Int) {
+    @IBAction func onThumbnailTap(sender: UITapGestureRecognizer) {
+        var thumbnailImageView = sender.view as UIImageView
+        var imageIndex = find(thumbnailImageViews, thumbnailImageView)
         var photoViewController = storyboard?.instantiateViewControllerWithIdentifier(kPhotoViewControllerID) as PhotoViewController
-        photoViewController.imageIndex = imageIndex
+        photoViewController.imageIndex = imageIndex == nil ? 0 : imageIndex!
         photoViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         photoViewController.transitioningDelegate = self
         presentViewController(photoViewController, animated: true, completion: nil)
