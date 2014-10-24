@@ -56,9 +56,13 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         return imageScrollViews[imageIndex]
     }
     
-    internal func getImageOffsetAndZoom() -> (zoomScale: CGFloat, offset: CGPoint) {
+    internal func getImagePosAndZoom() -> (position: CGPoint, zoomScale: CGFloat) {
         var imageScrollView = getCurrentImageScrollView()
-        return (imageScrollView.zoomScale, imageScrollView.contentOffset)
+        println("offset: \(imageScrollView.contentOffset)")
+        println("pos: \(imageScrollView.subviews[0].frame)")
+        println("posInView: \(view.convertPoint(imageScrollView.subviews[0].frame.origin, fromCoordinateSpace: imageScrollView))")
+        var imageViewOrigin = imageScrollView.subviews[0].frame.origin
+        return (view.convertPoint(imageViewOrigin, fromCoordinateSpace: imageScrollView), imageScrollView.zoomScale)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -124,7 +128,6 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView!, willDecelerate decelerate: Bool) {
-        println(contentOffset)
         if (zoomScale == 1) {
             (superview as UIScrollView).scrollEnabled = false
             if (abs(scrollView.contentOffset.y) < kScrollThreshold) { // scroll back in place
