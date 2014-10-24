@@ -127,10 +127,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             transitionImageView.hidden = false
             
             // Take into consideration the position insize the scrollView of the photo in the PhotoViewController
-            var imagePosAndZoom = photoViewController.getImagePosAndZoom()
-            transitionImageView.frame.size.width *= imagePosAndZoom.zoomScale
-            transitionImageView.frame.size.height *= imagePosAndZoom.zoomScale
-            transitionImageView.frame.origin = imagePosAndZoom.position
+            transitionImageView.frame = photoViewController.getImageFrame()
             
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
                 self.imageBackgroundView.alpha = 0

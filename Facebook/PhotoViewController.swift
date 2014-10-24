@@ -56,13 +56,11 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         return imageScrollViews[imageIndex]
     }
     
-    internal func getImagePosAndZoom() -> (position: CGPoint, zoomScale: CGFloat) {
+    internal func getImageFrame() -> CGRect {
         var imageScrollView = getCurrentImageScrollView()
-        println("offset: \(imageScrollView.contentOffset)")
-        println("pos: \(imageScrollView.subviews[0].frame)")
-        println("posInView: \(view.convertPoint(imageScrollView.subviews[0].frame.origin, fromCoordinateSpace: imageScrollView))")
-        var imageViewOrigin = imageScrollView.subviews[0].frame.origin
-        return (view.convertPoint(imageViewOrigin, fromCoordinateSpace: imageScrollView), imageScrollView.zoomScale)
+        var frame = imageScrollView.subviews[0].frame
+        frame.origin = view.convertPoint(frame.origin, fromCoordinateSpace: imageScrollView)
+        return frame
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
