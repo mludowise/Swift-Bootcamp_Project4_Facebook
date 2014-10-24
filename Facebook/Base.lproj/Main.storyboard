@@ -741,9 +741,6 @@
                                                 <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="5K5-Y6-kIG" appends="YES" id="V7d-ve-i9Q"/>
-                                                </connections>
                                             </imageView>
                                         </subviews>
                                     </scrollView>
@@ -755,9 +752,6 @@
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="k0Z-Bm-a3v" appends="YES" id="beY-PA-1zc"/>
-                                                </connections>
                                             </imageView>
                                         </subviews>
                                     </scrollView>
@@ -769,9 +763,6 @@
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="Xjy-87-Vbc" appends="YES" id="WvR-CK-n0A"/>
-                                                </connections>
                                             </imageView>
                                         </subviews>
                                     </scrollView>
@@ -783,9 +774,6 @@
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="Ai8-mX-PQr" appends="YES" id="fQ0-KH-jhl"/>
-                                                </connections>
                                             </imageView>
                                         </subviews>
                                     </scrollView>
@@ -797,9 +785,6 @@
                                                 <rect key="frame" x="0.0" y="177" width="320" height="214"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <gestureRecognizers/>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="8PU-nv-MCu" appends="YES" id="F74-nv-fkR"/>
-                                                </connections>
                                             </imageView>
                                         </subviews>
                                     </scrollView>
@@ -840,31 +825,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vu4-87-Shm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="5K5-Y6-kIG" userLabel="Pinch To Zoom 1">
-                    <connections>
-                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="bWI-A5-nW3"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <pinchGestureRecognizer id="k0Z-Bm-a3v" userLabel="Pinch To Zoom 2">
-                    <connections>
-                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="7ch-iq-9s4"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <pinchGestureRecognizer id="Xjy-87-Vbc" userLabel="Pinch To Zoom 3">
-                    <connections>
-                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="r6i-Gw-TNP"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <pinchGestureRecognizer id="Ai8-mX-PQr" userLabel="Pinch To Zoom 4">
-                    <connections>
-                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="p1g-xI-SMe"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <pinchGestureRecognizer id="8PU-nv-MCu" userLabel="Pinch To Zoom 5">
-                    <connections>
-                        <action selector="onPinchToZoom:" destination="Z0i-J3-IVH" id="GOS-2M-2kI"/>
-                    </connections>
-                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2720" y="2986"/>
         </scene>

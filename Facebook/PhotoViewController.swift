@@ -83,20 +83,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func onDoneButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func onPinchToZoom(pinchGestureRecognizer: UIPinchGestureRecognizer) {
-//        var imageScrollView = pinchGestureRecognizer.view?.superview as ImageScrollView
-//        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Began) {
-//            initialZoom = imageScrollView.zoomScale
-//        }
-//        imageScrollView.zoomScale = initialZoom * pinchGestureRecognizer.scale
-//        println("pinch")
-//        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Ended) {
-//            imageScrollView.adjustContentInset()
-//            println("end")
-//        }
-    }
+    }    
 }
 
 class ImageScrollView : UIScrollView, UIScrollViewDelegate {
