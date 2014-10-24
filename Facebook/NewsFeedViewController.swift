@@ -25,8 +25,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     private var isPresenting: Bool = true
     
     private var thumbnailImageViews : [UIImageView] = []
-    private var transitionImageView = UIImageView()
-    private var imageBackgroundView = UIView(frame: UIScreen.mainScreen().bounds)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +32,12 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         // Configure the content size of the scroll view
         scrollView.contentSize = CGSizeMake(320, feedImageView.image!.size.height)
         
+        // Track these in an array
         thumbnailImageViews.append(thumbnailImageView1)
         thumbnailImageViews.append(thumbnailImageView2)
         thumbnailImageViews.append(thumbnailImageView3)
         thumbnailImageViews.append(thumbnailImageView4)
         thumbnailImageViews.append(thumbnailImageView5)
-        
-        imageBackgroundView.backgroundColor = UIColor.blackColor()
-        transitionImageView.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -76,57 +72,65 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         var containerView = transitionContext.containerView()
-        
         var photoViewController = isPresenting ?
             transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as PhotoViewController :
             transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as PhotoViewController
         
         var thumbnailImageView = thumbnailImageViews[photoViewController.imageIndex]
+        
+        // Copy the background view from PhotoViewController
+        var backgroundView = UIView(frame: photoViewController.backgroundView.frame)
+        backgroundView.backgroundColor = photoViewController.backgroundView.backgroundColor
+        
+        // Copy the thumbnail image
+        var imageView = UIImageView(image: thumbnailImageView.image)
+        
+        // Add them both to our view
+        view.addSubview(backgroundView)
+        view.addSubview(imageView)
+        
+        // Calculate the frame of the thumbnail if the image wasn't clipped
         var thumbnailFrame = getResizedFrameFromAspectFill(thumbnailImageView.image!, thumbnailImageView.frame)
         thumbnailFrame.origin = view.convertPoint(thumbnailFrame.origin, fromView: thumbnailImageView.superview)
-        transitionImageView.image = thumbnailImageView.image
         
         if (isPresenting) {
-            // Set background to transparent
-            imageBackgroundView.alpha = 0
+            // Set background to transparent & set image frame to thumbnail
+            backgroundView.alpha = 0
+            imageView.frame = thumbnailFrame
             
-            // Set image frame to thumbnail
-            transitionImageView.frame = thumbnailFrame
-            
-            // Add them both to our view
-            view.addSubview(imageBackgroundView)
-            view.addSubview(transitionImageView)
-            
-            // Animate
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
-                // Set background to opaque
-                self.imageBackgroundView.alpha = 1
-                
-                // Set image frame to that of the resulting view
-                self.transitionImageView.frame = getResizedFrameFromAspectFit(self.transitionImageView.image!, UIScreen.mainScreen().bounds)
+                // Set background to opaque & set
+                backgroundView.alpha = 1
+                imageView.frame = photoViewController.getImageFrame()
                 }) { (finished: Bool) -> Void in
-                    self.imageBackgroundView.hidden = true
-                    self.transitionImageView.hidden = true
+                    // Bring the PhotoViewController to view
                     containerView.addSubview(photoViewController.view)
+                    
+                    // Remove the views
+                    backgroundView.removeFromSuperview()
+                    imageView.removeFromSuperview()
+                    
+                    // Mark the transition as complete
                     transitionContext.completeTransition(true)
             }
         } else {
+            // Remove the PhotoViewController view
             photoViewController.view.removeFromSuperview()
-            transitionImageView.frame = getResizedFrameFromAspectFit(transitionImageView.image!, UIScreen.mainScreen().bounds)
 
-            imageBackgroundView.hidden = false
-            transitionImageView.hidden = false
-            
-            // Take into consideration the position insize the scrollView of the photo in the PhotoViewController
-            transitionImageView.frame = photoViewController.getImageFrame()
+            // Set image frame photo
+            imageView.frame = photoViewController.getImageFrame()
             
             UIView.animateWithDuration(kTransitionDuration, animations: { () -> Void in
-                self.imageBackgroundView.alpha = 0
-                self.transitionImageView.frame = thumbnailFrame
+                // Set background to transparent & set image frame to thumbnail
+                backgroundView.alpha = 0
+                imageView.frame = thumbnailFrame
                 }) { (finished: Bool) -> Void in
+                    // Remove the views
+                    backgroundView.removeFromSuperview()
+                    imageView.removeFromSuperview()
+                    
+                    // Mark the transition as complete
                     transitionContext.completeTransition(true)
-                    self.imageBackgroundView.removeFromSuperview()
-                    self.transitionImageView.removeFromSuperview()
             }
         }
     }
