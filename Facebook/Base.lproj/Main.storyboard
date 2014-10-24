@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="hBK-bb-7vk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="aGi-zJ-dQh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -148,7 +148,11 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="YZ6-vp-O3X">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="9ZC-pw-zwh">
+                                <rect key="frame" x="150" y="120" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" id="YZ6-vp-O3X">
                                 <rect key="frame" x="0.0" y="110" width="320" height="1090"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -166,10 +170,6 @@
                                             <segue destination="4dZ-Wz-S84" kind="push" id="OOP-FU-3jb"/>
                                         </connections>
                                     </button>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="9ZC-pw-zwh">
-                                        <rect key="frame" x="150" y="8" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </activityIndicatorView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="LS2-qI-GWY">
                                         <rect key="frame" x="4" y="83" width="155" height="155"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -252,7 +252,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="9ZC-pw-zwh" id="gFb-dx-bV0"/>
                         <outlet property="feedImageView" destination="BFk-jQ-UCW" id="FKQ-21-8kr"/>
-                        <outlet property="feedView" destination="BFk-jQ-UCW" id="PBe-Vg-14e"/>
                         <outlet property="scrollView" destination="YZ6-vp-O3X" id="Pgj-Be-1bK"/>
                         <outlet property="thumbnailImageView1" destination="LS2-qI-GWY" id="1Gr-KM-9sS"/>
                         <outlet property="thumbnailImageView2" destination="vov-7j-glX" id="B2F-oE-vjQ"/>

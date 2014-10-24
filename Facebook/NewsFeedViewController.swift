@@ -13,7 +13,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var feedImageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var feedView: UIImageView!
     
     @IBOutlet weak var thumbnailImageView1: UIImageView!
     @IBOutlet weak var thumbnailImageView2: UIImageView!
@@ -46,7 +45,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         activityIndicator.startAnimating()
         delay(2, { () -> () in
             self.activityIndicator.stopAnimating()
-            self.feedView.alpha = 1
+            self.scrollView.alpha = 1
         })
         
         scrollView.contentInset.top = 0
