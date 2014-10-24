@@ -70,17 +70,12 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         prevImageIndex = imageIndex
     }
     
-    // TODO: Reset image size after paging
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//        imageScrollViews[prevImageIndex].reset()
-    }
-    
     private func initializeZoomScrollViews() {
         for (i, imageScrollView) in enumerate(imageScrollViews) {
             imageScrollView.backgroundView = backgroundView
             imageScrollView.viewController = self
-            imageScrollView.adjustScrollContentBounds()
-            imageScrollView.contentSize = imageScrollView.subviews[0].frame.size
+            imageScrollView.adjustContentInset()
+            imageScrollView.contentSize = imageScrollView.bounds.size//imageScrollView.subviews[0].frame.size
         }
     }
     
@@ -96,7 +91,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
 //        imageScrollView.zoomScale = initialZoom * pinchGestureRecognizer.scale
 //        println("pinch")
 //        if (pinchGestureRecognizer.state == UIGestureRecognizerState.Ended) {
-//            imageScrollView.adjustScrollContentBounds()
+//            imageScrollView.adjustContentInset()
 //            println("end")
 //        }
     }
@@ -117,15 +112,17 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.zoomScale <= 1) {
-            backgroundView.alpha = max(0, kScrollThreshold - abs(scrollView.contentOffset.y)) / kScrollThreshold * 0.5
+        if (!scrollView.zooming && zoomScale == 1) {
+            backgroundView.alpha = max(0, kScrollThreshold - abs(scrollView.contentOffset.y)) / kScrollThreshold * 0.5 + 0.5
+        } else {
+            backgroundView.alpha = 1
         }
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView!, willDecelerate decelerate: Bool) {
-        if (scrollView.zoomScale <= 1) {
+        if (zoomScale == 1) {
             if (abs(scrollView.contentOffset.y) < kScrollThreshold) { // scroll back in place
-                scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             } else {
                 viewController.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -133,37 +130,56 @@ class ImageScrollView : UIScrollView, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndZooming(scrollView: UIScrollView, withView view: UIView!, atScale scale: CGFloat) {
-//        adjustScrollContentBounds()
+        adjustContentInset()
+        
+        if (zoomScale > 1) {
+            // Disable paging until zoomed out
+            (superview as UIScrollView).scrollEnabled = false
+        } else {
+            (superview as UIScrollView).scrollEnabled = true
+            
+            // I don't understand why, but after over-zooming out, the picture zooms in and then bounces up. This readjusts it
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView!) -> UIView! {
         return subviews[0] as UIView
     }
     
-    func reset() {
-        zoomScale = 1
-        adjustScrollContentBounds()
-        (subviews[0] as UIView).center = center
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        var imageView = subviews[0] as UIImageView
+        var frameToCenter = imageView.frame
+        
+        // center horizontally
+        if (frameToCenter.size.width < bounds.width) {
+            frameToCenter.origin.x = (bounds.width - frameToCenter.width) / 2
+            contentSize.width = bounds.width
+        } else {
+            frameToCenter.origin.x = 0
+        }
+        
+        // center vertically
+        if (frameToCenter.size.height < bounds.height) {
+            frameToCenter.origin.y = (bounds.height - frameToCenter.height) / 2
+            contentSize.height = bounds.height
+        } else {
+            frameToCenter.origin.y = 0
+        }
+        
+        imageView.frame = frameToCenter
+        
     }
     
-    // TODO adjust contentSize & offset after Zoom
-    func adjustScrollContentBounds() {
+    private func adjustContentInset() {
         if (zoomScale >  1) { // Zoomed in
-//            contentSize = subviews[0].frame.size
-            var size = subviews[0].frame.size
-//            var offset = CGPoint(x: contentOffset.x - contentSize.width - size.width, y: contentOffset.y - contentSize.height - size.height)
-//            contentOffset.y -= contentSize.height - size.height
-//            contentOffset.x -= contentSize.width - size.width
-//            contentSize = size
-//            setContentOffset(offset, animated: true)
             contentInset.bottom = 0
             contentInset.top = 0
         } else { // Zoomed all the way out
-            var screenSize = UIScreen.mainScreen().bounds
-            contentSize = screenSize.size
-            contentInset.bottom = screenSize.height
-            contentInset.top = screenSize.height
+            contentInset.bottom = bounds.height
+            contentInset.top = bounds.height
         }
-        println("Adjusted to: \(contentSize)")
     }
 }
